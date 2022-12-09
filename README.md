@@ -5,3 +5,6 @@
 [chipyard](https://chipyard.readthedocs.io/en/stable/)
 
 [Verilog HDL]
+
+### blog
+- https://aifpga.tistory.com/m/
