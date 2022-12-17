@@ -15,3 +15,4 @@
 - https://aifpga.tistory.com/m/
 - [PIM-processing in memory](https://www.upmem.com/ressources/)
 - https://www.youtube.com/@OnurMutluLectures/playlists
+- https://hdlbits.01xz.net/wiki/Main_Page
