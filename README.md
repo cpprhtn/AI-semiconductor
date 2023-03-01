@@ -18,3 +18,4 @@
 - [PIM-processing in memory](https://www.upmem.com/ressources/)
 - https://www.youtube.com/@OnurMutluLectures/playlists
 - https://hdlbits.01xz.net/wiki/Main_Page
+- [패스트캠퍼스 반도체 설계 기본 Verilog&FPGA](https://fastcampus.co.kr/data_online_verilog)
