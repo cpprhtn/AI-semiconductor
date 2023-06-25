@@ -15,7 +15,9 @@
 
 ### blog
 - https://aifpga.tistory.com/m/
+- https://www.xilinx.com/support/university/vivado/vivado-workshops.html
 - [PIM-processing in memory](https://www.upmem.com/ressources/)
 - https://www.youtube.com/@OnurMutluLectures/playlists
 - https://hdlbits.01xz.net/wiki/Main_Page
 - [패스트캠퍼스 반도체 설계 기본 Verilog&FPGA](https://fastcampus.co.kr/data_online_verilog)
+- [인프런 Verilog HDL + FPGA 를 이용한 가속기 실습](https://www.inflearn.com/course/%EC%8B%A4%EC%A0%84-%ED%95%98%EB%93%9C%EC%9B%A8%EC%96%B4-%EC%84%A4%EA%B3%84?inst=818f0eee)
