@@ -24,3 +24,4 @@
 - https://github.com/ConstantPark/DL_Compiler
 - https://github.com/ConstantPark/Nerual-Network-Acceleration-1
 - https://github.com/ConstantPark/Neural-Network-Acceleration-2
+- https://github.com/merrymercy/awesome-tensor-compilers
