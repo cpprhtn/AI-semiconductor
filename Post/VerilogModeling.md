@@ -71,12 +71,48 @@ module mux_behavior(
     
     always @* begin
         case({b,a})
-            'b00    : Q=A;
-            'b01    : Q=B;
-            'b10    : Q=C;
-            'b11    : Q=D;
-            default : Q=0;
+            'b00    : Q = A;
+            'b01    : Q = B;
+            'b10    : Q = C;
+            'b11    : Q = D;
+            default : Q = 0;
         endcase
     end
 endmodule
+```
+
+- Procedure block
+  - initial: execute only once at time zero
+  - always : execute over and over, with condition defined at @
+  - begin-end: sequential executes
+  - fork-join : parallel executes
+
+```verilog
+initial begin
+    a = 0;
+    a = ~a;
+end
+
+always @(posedge clk, negedge rstn)
+if (!rstn)  a <= 0;
+else        a <= ~a;
+```
+
+```verilog
+initial begin
+    a = 0; b = 0; c = 0;
+    
+    #10 a = 1;    //time 10: a=1
+    #20 b = 1;    //time 20: b=1
+    #30 c = 1;    //time 30: c=1
+end
+
+initial begin
+    a = 0; b = 0; c = 0;
+    fork
+        #10 a = 1;    //time 10: a=1
+        #20 b = 1;    //time 20: b=1
+        #30 c = 1;    //time 30: c=1
+    join
+end
 ```
