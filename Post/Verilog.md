@@ -36,3 +36,148 @@ C/C++은 함수 기반 형태의 구조이지만 Verilog는 모듈 기반의 구
 - 동작에 대한 해석 (c = a + b)
   - C/C++: 덧셈 Command 실행. 결과는 수행된 동작.
   - Verilog: 덧셈 로직 구현. 결과는 동작이 아닌 회로.
+
+
+## Verilog 기본 문법 및 개념
+
+#### How to print?
+- $display have a role as similar as printf in C
+- $monitor is active only when variables change
+
+```verilog
+`timescale 1ns/1ns
+module hello_world;
+    int test = 0;
+    
+    inital begin
+        #10 $display("time %t : hello world %d ", $time, test++);
+        #10
+        $display("time %t : hello world %d ", $time, test++);
+        $display("time %t : hello world %d ", $time, test++);
+        
+        $finish;
+    end
+    
+    initial begin
+        $monitor("monitor test %d", test);
+    end
+endmodule
+```
+
+#### How to debug
+- $dumpfile define output files which can save waveform (*.vcd)
+- $dumpvars define the range of waveform dump
+
+```verilog
+module dump_example;
+    reg a, b;
+    initial begin
+            a=0; b=0;
+        #10 a=1; b=0;
+        #10 a=0; b=1;
+        #10 a=1; b=1;
+        $finish;
+    end
+    
+    initial begin
+        $dumpfile("dump_example.vcd");
+        $dumpvars(1, dump_example);
+        $display("test waveform dump");
+    end
+endmodule    
+```
+
+#### Data type
+- Value Set
+  - 0 : logic 0, false
+  - 1 : logic 1, true
+  - x : unknown
+  - z : high-impedance, open connection
+- Nets
+  - physical connection between entities 
+  - Do not store values This data type is always affected by driving circuit 
+  - Normally used in combinational logic 
+  - wire, tri, wand, wor, supply0, supply1, ……
+  - assign wire_a= … ; module_a inst_a(wire_a)
+  - module_binst_b(wire_b); module_c inst_c(wire_b);
+- Variables
+  - used in procedural blocks 
+  - Store values 
+  - Normally used in not only sequential logic but also combinational logic
+  - reg, int, real, time
+  - initial begin reg_a = …; end 
+  - always @(*) begin reg_b= …; end
+  - reg_a, reg_bkeeps its value before next line
+  - always @(posedge clk) begin reg_c<= …; end
+- Vectors
+  - nets, variables are usually 1 bit type
+  - We can define bit width “N” like
+  - wire [N-1:0] wire_a; reg [N-1:0] reg_a;
+- Array
+  - Data type can have its dimensions
+  - [N-1:0] after data type keyword means bit width=N (vector)
+  - while [M-1:0]after variable name means its depth=M (scalar)
+  - wire [N-1:0] array_a[M-1:0];
+    reg [N-1:0] array_b[M-1:0]
+  - 
+#### Instantiation 
+- Call sub-modules below module 
+- Hierarchy between modules
+
+#### Module 
+- Design Unit in general
+- Usually, one module in a file with same name
+
+#### Port
+- input & output & (inout) , 
+- interface between modules 
+- We can express bit width as data type
+
+#### Parameter
+- Bit width for vector or array can be various depending on situation
+- for same function with different bit width, it’s too inefficient to make lots of modules for each bit width
+- We can use parameters for variant number. We don’t need to fix bit width which is variant
+- parameterized design is very recommended in field because it is very good to reuse
+
+- parameter override
+  - Several bit width should be used at multiple instance in hierarchy
+  - We can control parameter’s value in upper hierarchy
+  - defparam, parameter argument are the way
+- localparam
+  - This acts like parameter in a module but can’t be overridden by upper hierarchy
+
+#### DEFINE
+- Usage 
+  - This role is similar with language C 
+  - Sometimes, several lines should be compiled or not depending on situation define is frequently used with ifdef/else for covering this case
+  - `define`, `ifdef`, `ifndef`, `else` in Verilog
+  - Do not use too much because it can make worse readability
+
+#### Operator
+- Bit-part
+  - wire [3:0] a;
+  - wire[1:0] b, c; <br><br>
+  - b=a[3:2];
+  - c=a[1:0];
+
+- Concatenation
+  - a = {b, c};
+  - {b, c} = a; <br><br>
+  - Replication a = {2{b}, c};
+  - Bit width of each variables are very important
+- Conditional
+  - a = b ? c : d;
+- Arithmetic
+  - a+b; a-b; a*b; a/b; a%b; a**b;
+- Relational
+  - a<b; a>b; a<=b; a>=b;
+- Equality
+  - a===b; a!==b; a==b; a!=b;
+- Logical
+  - a && b; a || b; !a;
+- Bitwise 
+  - ~a; a & b; a | b; a ^ b;
+- Unary
+  - &a; |a; ^a;
+- Shift 
+  - a >> 3; a << 3; a >>> 3; a <<< 3;
