@@ -116,3 +116,21 @@ initial begin
     join
 end
 ```
+
+- blocking assignment
+  - executes in order, sequential
+  - previous line blocks next line. it is why they are called blocking
+  - a=b;
+- Non-Blocking assignment
+  - executes in parallel
+  - previous line doesn’t block next line. it is why they are called non-blocking
+  - a<=b;
+  - Do not mix blocking & non-blocking in a procedure
+- always @(sensitivity list)
+  - always block executes when sensitivity list events
+  - always @(a, b)means this procedure executes when a or b changes
+  - always @(*): * means any signal event who affects output of this procedure
+  - always @(posedge clk) means this procedure excutes when clk is rising
+  - always @(negedge rstn) means this procedure excutes when rstn is falling
+  - always @* , always @(posedge clk, negedgerstn) are most common usage
+- 
