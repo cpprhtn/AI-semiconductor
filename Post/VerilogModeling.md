@@ -133,4 +133,3 @@ end
   - always @(posedge clk) means this procedure excutes when clk is rising
   - always @(negedge rstn) means this procedure excutes when rstn is falling
   - always @* , always @(posedge clk, negedgerstn) are most common usage
-- 
