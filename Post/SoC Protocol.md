@@ -125,3 +125,67 @@ Communication between different Time-Line
 #### Asynchronous FIFO
 - Pushing Data & Popping Data are easy. Each has separate domain
 - Handling control signal is difficult, need gray counter.
+
+## AMBA
+#### Bus
+- every block needs to communicate with others
+- It can be too complicate if we connect each block independenrly
+- BUS is likely literally bus on highway
+
+- Components
+  - Interconnect
+  - Master
+  - Slave
+- Protocol
+  - APB
+  - AHB
+  - AXI
+#### APB interface
+Write transfer
+- Master
+  - PENAABLE, PWRITE, PADDR, PWDATA
+  - PSTRB
+- DECODER
+  - PSEL
+  - PASSR
+- SLAVE
+  - PREADY
+Read transfer
+- Master
+  - PENABLE, PWRITE, PADDR
+- DECODER
+  - PSEL
+  - PADDR
+- SLAVE
+  - PREADY
+  - PRDATA
+
+#### AHB interface
+Basic transfer
+- Read
+  - HRDATA follows next to HADDR
+  - Separate phase
+- Write
+  - HWDATA follows next ot HADDR
+- Mixed
+  - Each transfer follows rule
+- Transfer types
+  - NONSEQ is mostly like PENABLE signal
+  - SEQ will follow previous information ADDR will be sum of previous HADDR and HSIZE
+
+#### APB/AHB Modeling
+- APB Modeling
+  - Design type
+    - Slave >> Bridge >> Master >> Interconnect
+  - Most Usage: Configure register (SFR)
+  - Design
+    - Very easy, can make strobe for write/read
+    - case decoder
+- AHB Mdoeling
+  - Design type
+    - Slave >= Master >> Bridge >> Interconnect
+    - Usage: Data transfer
+    - Design
+      - Need to consider transaction type
+
+#### AXI channels
