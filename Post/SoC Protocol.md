@@ -92,3 +92,36 @@ module sram_wrapper_64x8 (
 `endif
 endmodule
 ```
+
+#### Various kinds of SRAM
+- TPSRAM
+- DPSRAM
+
+## FIFO
+Communication between different Time-Line
+- bigger size FIFO makes handle timing easier
+- Calculate optimized DEPTH for control
+- Avoid overflow & underflow
+
+#### FIFO Modeling
+- Storage
+- Control Logic (pointer)
+- Control Logic (full, empty, af, ae)
+- Parameter
+- Naming
+- Define
+
+#### CDC & Async FIFO
+- Clock Domain Crossing
+  - Very careful when using multiple clock
+  - Stabilize signals when crossing the clock domain
+- Async FIFO
+  - Use dual clock
+  - Very useful IP for transferring data between different clock
+- CDC's issue
+  - can't deliver the data at real-time
+  - too much latency burden to stabilize the signals
+
+#### Asynchronous FIFO
+- Pushing Data & Popping Data are easy. Each has separate domain
+- Handling control signal is difficult, need gray counter.
