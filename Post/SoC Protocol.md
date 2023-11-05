@@ -126,7 +126,7 @@ Communication between different Time-Line
 - Pushing Data & Popping Data are easy. Each has separate domain
 - Handling control signal is difficult, need gray counter.
 
-## AMBA
+## AMBA (advanced Microcontroller Bus Architeucture)
 #### Bus
 - every block needs to communicate with others
 - It can be too complicate if we connect each block independenrly
@@ -189,3 +189,85 @@ Basic transfer
       - Need to consider transaction type
 
 #### AXI channels
+- Separate channels for Address & Data
+- More powerful then separate phase
+- Channel dependencies
+  - VALID, READY for handshake
+
+#### AXI interface
+Basic transactions
+- Concept of separate channel, needs ID/SIZE/LEN/BURST for specifying request
+- Burst operation
+- QoS
+  - AWQOS/ARQOS, 4bit, optional
+  - Higher value means higher priority, it affects arbitration
+- REGION
+  - AWREGION/ARREGION, 4bit, optional
+  - Provide another address map, Different REGION means different address
+- LOCK/PROT/CACHE
+  - Similar with AHB
+  - Locked transfer, Protection, Memory type
+- USER
+  - AWUSER/ARUSER
+  - User defined signals
+
+#### AXI interface Modeling
+- Design type
+  - Slave, Master > imterconnect > Bridge
+- Usage: Data transfer
+  - DRAM Controller
+  - Graphic core
+- Write transaction
+  - each W channel should reflect each AW's info unitl wlast
+  - It is necessary to have enough space to store
+  - AW's info can be deleted when corresponding B is issued
+- Read transaction
+  - each R channel should relfect each AR's info until rlast
+  - Same as Write
+- Valid & Ready control
+  - Ready should be asserted when it can accept
+  - usually, Slave de-assert wready when it doesn't get aw info
+- Various size support
+  - Depends on size, slave should gather and split the data
+  - It can make wready or rvalid not keeping enable state
+
+#### AXI interconnect
+- Converter
+  - There are lots of Masters and Slaves
+  - All of them don't have same bit width, frequency, version we need converter
+- Arbiter/Decoder
+  - There are lots of Masters, and Slaves
+  - need to define which slave and master will be picked Input stage means converter which introduced previous page
+  - Decoder is simple because we only adjust address and region Arbitration is complex because multiple master will access simultaneously
+- Arbitration schemes
+  - some rules for arbitration
+  - RR, LRG with priority
+
+## Serial
+#### I2C interface
+- I2C port
+  - SCL / Controller / Control
+  - SDA / Controller Device / Address & Data (bi-direction)
+- Signal behavior
+  - DATA, START, STOP
+- I2C behavior
+  - Between START and STOP, Data will be transmitted in 8bit unit + ACK
+  - START -> ADDRESS, R/W -> DATA (repeat N times) -> STOP
+- I2C connection
+  - only Controller ASIC can drive SCL signal
+  - Address, Write Data will be transmitted from Controller ASIC on SDA pin Read Data can be driven by other devices on SDA (bi-directional)
+
+#### I2C Modeling
+- FSM Controlled by
+  - START condition
+  - Address Detect
+  - R/W detect
+  - STOP condition
+- SDA direction
+  - When Read detected, direction should be converted
+  - default: SDA = 'bZ;
+- SERDES
+  - 1bit interface should be converted to parallel
+  - data_in <= {data_int[N-1:0], SDA}; data_out <= data_out >> 1; assign SDA = data_out[0];
+
+## SPI interface
