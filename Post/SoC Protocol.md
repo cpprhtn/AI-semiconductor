@@ -270,4 +270,30 @@ Basic transactions
   - 1bit interface should be converted to parallel
   - data_in <= {data_int[N-1:0], SDA}; data_out <= data_out >> 1; assign SDA = data_out[0];
 
-## SPI interface
+#### SPI Modeling
+- Configure
+  - Many options are already set by registers rather than SPI i/f
+- Select
+  - Slave can be picked by SS_n
+  - No need of detect address like I2C, which means no need of FSM
+- Data
+  - One set of 8bit is complete unit: MOSI/MISO
+  - No dependency with another 8bit set, No need FSM
+  - No start/stop condition by data pin, it can be controlled by SS_n
+- SERDES
+  - Same as I2C
+
+#### UART Modeling
+- Configure
+  - Baud rate, Parity enable, # of Stop bit
+  - Write Data/Write Enable/Write Complete
+  - Read Data/Read Enable/Write Complete
+  - Separate FSM is usually handled by APB control
+- Select
+  - No selcetion because UART is 1:1 communication
+- Data
+  - One set of 1+8+(1)+1,(2) bit is complete unit, No dependency with another set
+  - some conditions are controlled by same pin
+  - Data should be captured at sampling rate
+- SERDES
+  - Same as I2C, SPI
