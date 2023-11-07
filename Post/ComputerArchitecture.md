@@ -231,5 +231,41 @@ Write miss operation is not clear while Read is clear
     - Substrate -> Decrease Vth
 - READ
   - Detect Vth
-  - 0:
-  - 1: 
+  - 0: high Vth -> Switch off
+  - 1: low Vth -> Switch on
+
+#### NAND unit
+- NAND string
+  - a set of serial connection of NAND
+  - consists of 32, 64 floating-gate cell
+  - unit of making rather than control
+- NAND page
+  - minimum unit of R/W
+  - 512B, 2KB, 4KB
+- NAND block
+  - minimum unit of erase
+  - Small Block: 32 pages
+  - Large Block: 64 pages
+
+#### NAND vs NOR
+- NAND Flash
+  - serial connection
+  - less contact -> less area
+- NOR Flash
+  - parallel connection
+  - more contact -> more area
+
+#### MAND problem & solution
+- Cell endurance
+  - Erase can damage CELL's life-time
+  - Read doesn't affect
+- Wear Leveling
+  - Remap address for distribution
+  - Change translation table periodically
+- BER
+  - NAND has higher BER
+  - Can't guarantee every data from NAND Flash
+- ECC
+  - Using parity, Error bit can be corrected
+  - Hamming is most simple one
+  - More complex algorithm is used for NAND
