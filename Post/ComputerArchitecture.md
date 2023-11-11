@@ -255,7 +255,7 @@ Write miss operation is not clear while Read is clear
   - parallel connection
   - more contact -> more area
 
-#### MAND problem & solution
+#### NAND problem & solution
 - Cell endurance
   - Erase can damage CELL's life-time
   - Read doesn't affect
