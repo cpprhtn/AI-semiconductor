@@ -52,3 +52,27 @@ BOARD
 - PIN
 - SPEED GARDE
 - TEMPERATURE RANGE
+
+#### User guide
+- Board User guide
+- FPGA User guide
+
+#### Project 생성
+- Create project
+- Verilog 추가 및 생성
+- Create IP
+- Synthesis에 맞는 코드 작성
+- Constraint 작성
+- Implementation에 맞는 코드 작성
+- Btistream 생성
+- FPGA에 업로드
+
+## FPGA에서 waveform 보기
+#### ILA (chipscope)의 필요성
+ILA (INtegrated logic Analyzer)
+- called as chipscope before
+- Can't detect any signal insdie FPGA only we can check is LED/7-segment
+- Even we arleady check at simulation.
+- Debug feature is more important at bigger system
+- We can select signal & waveform at selected point
+- We can set the capture window
